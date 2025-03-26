@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Health & Lifestyle Survey</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='cssFiles/contact_Obesity.css') }}">
+        <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'> <!-- Boxicons for icons -->
+        @import url('https://fonts.googleapis.com/css2?family=Nabla&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Trade+Winds&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Creepster&display=swap');
+    </head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="sticky-nav">
+        <div class="nav-container">
+            <!-- Profile icon on the left -->
+            <i class='bx bx-user-circle profile-icon'></i>
+            <a href="index.html" class="logo">Health & Lifestyle</a>
+            <ul class="nav-links">
+                <li><a href="{{ url_for('index') }}">Home</a></li>
+                <li><a href="{{ url_for('obesity') }}">BMI</a></li>
+                <li><a href="{{ url_for('userfeedback') }}">Feed back</a></li>
+                <li><a href="{{ url_for('About_obesity') }}" >About</a></li>
+                <li><a href="#contact" style="color:blue;">Contact</a></li>
+                <li><a href="#contact">Log out</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container">
+       
+
+        <!-- Hospital Photo -->
+        <img src="{{ url_for('static', filename='images/pngegg.png') }}" alt="Hospital Photo" class="hospital-photo">
+
+        <!-- Hospital Name -->
+        <h1>NELLORE TIGER Hospital</h1>
+
+        <!-- Contact Information -->
+        <div class="contact-info">
+            <h2>Contact Information</h2>
+            <p><strong class="t">Address:</strong> 123 Health Lane, Green Valley, City, Country</p>
+            <p><strong class="t">Phone:</strong> <a href="tel:+1234567890">+1 (234) 567-890</a></p>
+            <p><strong class="t">Email:</strong> <a href="mailto:info@greenvalleyhospital.com">info@greenvalleyhospital.com</a></p>
+            <p><strong class="t">Doctor's Name:</strong> Dr. John Doe</p>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>WE ARE TRYING TO GIVE 100% ACCURACY PREDICTION</p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Health & Lifestyle Survey</title>
+    <link rel="stylesheet" href="../cssFiles/depression.css">
+</head>
+<body>
+    <!-- Sticky Navigation Bar -->
+    <nav class="sticky-nav">
+        <div class="nav-container">
+            <a href="../index.html" class="logo"><img src="../images/arrow.png" height="25px" width="25px">&nbsp MedPredict</a>
+            <ul class="nav-links">
+                <li><a href="../index.html#container">Home</a></li>
+                <li><a href="../index.html#about">About</a></li>
+                <li><a href="../index.html#contact">Contact</a></li>
+            </ul>
+           
+        </div>
+    </nav>
+    <div class="form-container">
+        <h1>STUDENT DEPRESSION TEST</h1>
+        <form action="submit.php" method="post">
+            <label for="gender">Gender:</label>
+            <select id="gender" name="gender" required>
+                <option value="" disabled selected>Select your gender</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+                <option value="other">Other</option>
+            </select>
+
+
+            <label for="age">Age:</label>
+            <input type="number" id="age" name="age" min="1" placeholder="Enter your age" required>
+
+            <label for="acd_pressure">Academic Pressure (0-5):</label>
+            <input type="number" id="acd_pressure" name="acd_pressure" min="0" max="5" placeholder=" 0 - 5 " required>
+
+            <label for="cgpa">CGPA (0-10):</label>
+            <input type="number" id="cgpa" name="cgpa" min="0" max="5" placeholder=" 0 - 10 " step="0.1" required>
+
+            <label for="sleep">Sleep Duration:</label>
+            <select id="sleep" name="sleep" required>
+                <option value="" disabled selected>Select your sleep duration</option>
+                <option value="less than 5">Less than 5 hours</option>
+                <option value="5-6 hours">5-6 hours</option>
+                <option value="7-8 hours">7-8 hours</option>
+                <option value="more than 8 hours">More than 8 hours</option>
+                <option value="others">Others</option>
+            </select>
+
+            <label for="diet">Dietry Habits:</label>
+            <select id="diet" name="diet" required>
+                <option value="" disabled selected>Select your dietry habit</option>
+                <option value="unhealthy">Unhealthy</option>
+                <option value="moderate">Moderate</option>
+                <option value="healthy">Healthy</option>
+                <option value="others">Others</option>
+            </select>
+
+            <label for="suicide">Have you ever had suicidal thoughts?</label>
+            <select id="suicide" name="smoke" required>
+                <option value="" disabled selected>Select an option</option>
+                <option value="yes">Yes</option>
+                <option value="no">No</option>
+            </select>
+
+            <label for="study_hours">Study hours:</label>
+            <input type="number" id="study_hours" name="studt_hours" min="0" max="24" placeholder="Study hours" required>
+
+            <label for="fin_stress">Financial Stress(0-5):</label>
+            <input type="number" id="fin_stress" name="fin_stress" min="0" max="5" placeholder=" 0 - 5 " required>
+
+            <label for="mental_ill">Family history of mental illness?</label>
+            <select id="mental_ill" name="mental_ill" required>
+                <option value="" disabled selected>Select an option</option>
+                <option value="yes">Yes</option>
+                <option value="no">No</option>
+            </select>
+
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+    <footer>
+        <p>WE ARE TRY TO GIVE 100% ACCURACY PRIDICTION</p>
+    </footer>
+</body>
+</html>

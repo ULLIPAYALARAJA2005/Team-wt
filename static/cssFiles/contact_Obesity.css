@@ -1,0 +1,261 @@
+h1 {
+    font-size: 2.8rem;
+    margin-bottom: 20px;
+    font-weight: 600;
+    font-family: "Nabla", system-ui;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+    font-variation-settings:
+      "EDPT" 100,
+      "EHLT" 12;
+  
+}
+/* CSS Variables */
+:root {
+    --primary-color: #6c5ce7; /* Primary color (purple) */
+    --secondary-color: #a29bfe; /* Secondary color (light purple) */
+    --background-gradient: linear-gradient(135deg, #6c5ce7, #a29bfe); /* Gradient background */
+    --glassmorphism-bg: rgba(255, 255, 255, 0.1); /* Semi-transparent background for glassmorphism effect */
+    --neumorphism-shadow: 10px 10px 20px rgba(0, 0, 0, 0.1), -10px -10px 20px rgba(255, 255, 255, 0.5); /* Shadow for neumorphism effect */
+    --font-primary: 'Poppins', sans-serif; /* Primary font for the website */
+}
+
+/* General Styles */
+body {
+    font-family: var(--font-primary);
+    margin: 0;
+    padding: 0;
+    background: var(--background-gradient);
+    color: #2d3748;
+    line-height: 1.6;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow-x: hidden; /* Prevent horizontal scrolling */
+}
+
+/* Sticky Navigation Bar */
+.sticky-nav {
+    position: fixed; /* Fixed at the top */
+    top: 0; /* Stick to the top of the page */
+    width: 100%; /* Full width */
+    background: var(--glassmorphism-bg); /* Apply glassmorphism background */
+    backdrop-filter: blur(10px); /* Add blur effect to the background */
+    box-shadow: var(--neumorphism-shadow); /* Apply neumorphism shadow */
+    z-index: 1000; /* Ensure the nav bar stays on top of other elements */
+}
+
+/* Navigation container */
+.nav-container {
+    display: flex; /* Use flexbox for layout */
+    justify-content: space-between; /* Space out items horizontally */
+    align-items: center; /* Center items vertically */
+    padding: 0.6rem 2rem; /* Reduced padding to decrease height */
+}
+
+/* Logo styles */
+.logo {
+    font-size: 1.5rem; /* Set font size */
+    font-weight: bold; /* Make the text bold */
+    color: #fff; /* Set text color to white */
+    text-decoration: none; /* Remove underline from links */
+}
+
+/* Navigation links */
+.nav-links {
+    display: flex; /* Use flexbox for layout */
+    gap: 2rem; /* Add space between links */
+    list-style: none; /* Remove bullet points from the list */
+    margin: 0; /* Remove default margin */
+    padding: 0; /* Remove default padding */
+}
+
+/* Navigation link styles */
+.nav-links a {
+    color: #fff; /* Set link color to white */
+    text-decoration: none; /* Remove underline from links */
+    transition: color 0.3s ease; /* Add smooth color transition on hover */
+}
+
+/* Navigation link hover effect */
+.nav-links a:hover {
+    color: var(--primary-color); /* Change link color to primary color on hover */
+}
+
+/* Container for the content */
+.container {
+    max-width: 800px;
+    width: 90%;
+    padding: 40px;
+    background: var(--glassmorphism-bg);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    box-shadow: var(--neumorphism-shadow);
+    text-align: center;
+    animation: fadeIn 1s ease-in-out;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    margin-top: 80px; /* Add margin to avoid overlap with the fixed nav bar */
+    margin-bottom: 80px; /* Add margin for the footer */
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Back Link */
+.back-link {
+    display: block;
+    text-align: left;
+    margin-bottom: 20px;
+    font-size: 1rem;
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.back-link:hover {
+    color: var(--secondary-color);
+    text-decoration: underline;
+}
+
+/* Hospital Photo */
+.hospital-photo {
+    max-width: 100%;
+    height: auto;
+    border-radius: 15px;
+    margin-bottom: 30px;
+    box-shadow: var(--neumorphism-shadow);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.hospital-photo:hover {
+    transform: scale(1.02);
+    box-shadow: 10px 10px 30px rgba(0, 0, 0, 0.2), -10px -10px 30px rgba(255, 255, 255, 0.6);
+}
+
+
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Contact Information Section */
+.contact-info {
+    text-align: left;
+    margin-top: 30px;
+}
+
+.contact-info h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    font-weight: 600;
+    position: relative;
+    display: inline-block;
+    font-family: "Creepster", system-ui;
+    font-weight: 400;
+    font-style: normal;
+
+}
+
+.contact-info h2::after {
+    content: '';
+    display: block;
+    width: 50%;
+    height: 4px;
+    background: var(--primary-color);
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+    border-radius: 2px;
+}
+
+.contact-info p {
+    font-size: 1.1rem;
+    margin: 15px 0;
+    animation: fadeIn 1.5s ease-in-out;
+}
+
+.contact-info p strong {
+    font-weight: 600;
+}
+
+.contact-info p a {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.contact-info p a:hover {
+    text-decoration: underline;
+}
+
+/* Footer styles */
+footer {
+    text-align: center; /* Center the text */
+    padding: 1rem; /* Add padding inside the footer */
+    background: var(--glassmorphism-bg); /* Apply glassmorphism background */
+    backdrop-filter: blur(10px); /* Add blur effect to the background */
+    margin-top: 2rem; /* Add space above the footer */
+    box-shadow: var(--neumorphism-shadow); /* Apply neumorphism shadow */
+    clear: both; /* Clear floats to prevent layout issues */
+    width: 100%; /* Full width */
+    bottom: 0; /* Stick to the bottom of the page */
+}
+
+footer p {
+    margin: 0; /* Remove default margin */
+    color: #fff; /* Set text color to white */
+    font-family: "Barriecito", system-ui;
+    font-weight: 400;
+    font-style: normal;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 2.2rem;
+    }
+
+    .contact-info h2 {
+        font-size: 1.8rem;
+    }
+
+    .container {
+        padding: 20px;
+    }
+}
+.profile-icon {
+    font-size: 1.5rem; /* Set icon size */
+    color: #fff; /* Set icon color to white */
+    cursor: pointer; /* Change cursor to pointer on hover */
+    transition: color 0.3s ease; /* Add smooth color transition on hover */
+    margin-right: 1rem; /* Add space between the icon and the logo */
+
+
+    
+}
+
+.t{
+    font-family: "Trade Winds", system-ui;
+    font-weight: 400;
+    font-style: normal;
+
+}

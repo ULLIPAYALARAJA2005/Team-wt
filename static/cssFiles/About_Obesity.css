@@ -1,0 +1,313 @@
+        /* General Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.8;
+            background: #1e3c72; /* Fixed background color */
+            color: #fff; /* Default text color */
+            overflow-x: hidden;
+            transition: background 0.5s ease, color 0.5s ease;
+        }
+
+        body.light-mode {
+            background: #f4f4f9;
+            color: #333;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, rgba(0, 123, 255, 0.8), rgba(0, 198, 255, 0.8));
+            color: #fff;
+            padding: 80px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            animation: fadeIn 1.5s ease-in-out;
+        }
+
+        header h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin: 0;
+            font-family: "Alfa Slab One", serif;
+            font-weight: 400;
+            font-style: normal;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* Container */
+        .container {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(10px);
+            transition: background 0.5s ease, box-shadow 0.5s ease;
+            margin-bottom: 100px; /* Add margin to avoid overlap with the footer */
+        }
+
+        body.light-mode .container {
+            background: rgba(255, 255, 255, 0.9);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Sections */
+        .section {
+            margin-bottom: 50px;
+            padding: 25px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        body.light-mode .section {
+            background: rgba(255, 255, 255, 0.9);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        h2 {
+            font-size: 2rem;
+            color: #00C6FF;
+            margin-bottom: 20px;
+            border-bottom: 3px solid #00C6FF;
+            padding-bottom: 10px;
+            display: inline-block;
+            transition: color 0.5s ease;
+        }
+
+        body.light-mode h2 {
+            color: #007BFF;
+        }
+
+        h3 {
+            font-size: 1.6rem;
+            color: #fff;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            transition: color 0.5s ease;
+        }
+
+        body.light-mode h3 {
+            color: #333;
+        }
+
+        p {
+            font-size: 1.1rem;
+            margin-bottom: 25px;
+            color: #ddd;
+            transition: color 0.5s ease;
+        }
+
+        body.light-mode p {
+            color: #555;
+        }
+
+        ul {
+            margin-bottom: 25px;
+            padding-left: 20px;
+        }
+
+        ul li {
+            margin-bottom: 10px;
+            color: #ddd;
+            transition: color 0.5s ease;
+        }
+
+        body.light-mode ul li {
+            color: #555;
+        }
+
+        /* Links */
+        a {
+            color: #00C6FF;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        body.light-mode a {
+            color: #007BFF;
+        }
+
+        a:hover {
+            color: #007BFF;
+        }
+
+        body.light-mode a:hover {
+            color: #0056b3;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2rem;
+            }
+
+            .container {
+                padding: 20px;
+            }
+
+            h2 {
+                font-size: 1.8rem;
+            }
+
+            h3 {
+                font-size: 1.4rem;
+            }
+
+            p {
+                font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header h1 {
+                font-size: 1.8rem;
+            }
+
+            nav {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            nav a {
+                margin: 5px 0;
+            }
+        }
+
+        /* Additional Animations */
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .section:nth-child(odd) {
+            animation: slideInLeft 1s ease-in-out;
+        }
+
+        .section:nth-child(even) {
+            animation: slideInRight 1s ease-in-out;
+        }
+
+        /* Sticky Navigation Bar */
+        .sticky-nav {
+            position: fixed; /* Fixed at the top */
+            top: 0; /* Stick to the top of the page */
+            width: 100%; /* Full width */
+            background: rgba(255, 255, 255, 0.1); /* Semi-transparent background */
+            backdrop-filter: blur(10px); /* Add blur effect to the background */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Add shadow for depth */
+            z-index: 1000; /* Ensure the nav bar stays on top of other elements */
+        }
+
+        /* Navigation container */
+        .nav-container {
+            display: flex; /* Use flexbox for layout */
+            justify-content: space-between; /* Space out items horizontally */
+            align-items: center; /* Center items vertically */
+            padding: 0.6rem 2rem; /* Reduced padding to decrease height */
+        }
+
+        /* Logo styles */
+        .logo {
+            font-size: 1.5rem; /* Set font size */
+            font-weight: bold; /* Make the text bold */
+            color: #fff; /* Set text color to white */
+            text-decoration: none; /* Remove underline from links */
+        }
+
+        /* Navigation links */
+        .nav-links {
+            display: flex; /* Use flexbox for layout */
+            gap: 2rem; /* Add space between links */
+            list-style: none; /* Remove bullet points from the list */
+            margin: 0; /* Remove default margin */
+            padding: 0; /* Remove default padding */
+        }
+
+        /* Navigation link styles */
+        .nav-links a {
+            color: #fff; /* Set link color to white */
+            text-decoration: none; /* Remove underline from links */
+            transition: color 0.3s ease; /* Add smooth color transition on hover */
+        }
+
+        /* Navigation link hover effect */
+        .nav-links a:hover {
+            color: #00C6FF; /* Change link color to primary color on hover */
+        }
+
+        /* Footer */
+        footer {
+            text-align: center; /* Center the text */
+            padding: 1rem; /* Add padding inside the footer */
+            background: rgba(255, 255, 255, 0.1); /* Semi-transparent background */
+            backdrop-filter: blur(10px); /* Add blur effect to the background */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Add shadow for depth */
+            width: 100%; /* Full width */
+            bottom: 0; /* Stick to the bottom of the page */
+            z-index: 1000; /* Ensure the footer stays on top of other elements */
+        }
+
+        footer p {
+            margin: 0; /* Remove default margin */
+            color: #fff; /* Set text color to white */
+            font-family: "Poppins", sans-serif; /* Use Poppins font */
+            font-weight: 500; /* Medium font weight */
+        }
+
+        .profile-icon {
+            font-size: 1.5rem; /* Set icon size */
+            color: #fff; /* Set icon color to white */
+            cursor: pointer; /* Change cursor to pointer on hover */
+            transition: color 0.3s ease; /* Add smooth color transition on hover */
+            margin-right: 1rem; /* Add space between the icon and the logo */
+        }

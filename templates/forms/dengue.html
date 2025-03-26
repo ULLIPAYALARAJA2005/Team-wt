@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dengue</title>
+    <link rel="stylesheet" href="../cssFiles/Dengue.css">
+</head>
+<body>
+	<!-- Sticky Navigation Bar -->
+    <nav class="sticky-nav">
+        <div class="nav-container">
+            <a href="../index.html" class="logo"><img src="../images/arrow.png" height="25px" width="25px">&nbsp MedPredict</a>
+            <ul class="nav-links">
+                <li><a href="../index.html#container">Home</a></li>
+                <li><a href="../index.html#about">About</a></li>
+                <li><a href="../index.html#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+	<div class="form-container">
+	    <h1>Dengue Symptom Form</h1>
+	    <form action="/submit" method="POST">
+		<label for="fever"> Do you have fever? :   </label>
+		<input type="radio" id="feverYes" name="fever" value="yes" required>
+		<label for="feverYes"> Yes</label>
+		<input type="radio" id="feverNo" name="fever" value="no" required>
+		<label for="feverNo"> No</label><br><br>
+
+		<label for="headache">Do you have Headache? :</label>
+		<input type="radio" id="headacheYes" name="headache" value="yes" required>
+		<label for="headacheYes">Yes</label>
+		<input type="radio" id="headacheNo" name="headache" value="no" required>
+		<label for="headacheNo">No</label><br><br>
+
+		<label for="jointPain">Do you have any Joint Pains? :</label>
+		<input type="radio" id="jointPainYes" name="jointPain" value="yes" required>
+		<label for="jointPainYes">Yes</label>
+		<input type="radio" id="jointPainNo" name="jointPain" value="no" required>
+		<label for="jointPainNo">No</label><br><br>
+
+		<label for="bleeding">Do you have any bleeding gums? :</label>
+		<input type="radio" id="bleedingYes" name="bleeding" value="yes" required>
+		<label for="bleedingYes">Yes</label>
+		<input type="radio" id="bleedingNo" name="bleeding" value="no" required>
+		<label for="bleedingNo">No</label><br><br>
+
+		<input type="submit" value="Submit">
+	    </form>
+	  </div>
+	   <footer>
+        <p>WE ARE TRY TO GIVE 100% ACCURACY PRIDICTION</p>
+    </footer>
+	</body>
+</html>
+

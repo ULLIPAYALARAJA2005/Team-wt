@@ -1,0 +1,106 @@
+<html>
+    <head>
+      <title>Disease Prediction</title>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link rel="stylesheet" href="{{ url_for('static', filename='cssFiles/home-style.css') }}">
+    </head>
+    <body> 
+      <div class="navbar">
+        <img src="static/images/logo.png" alt="logo" class="logo">
+        <p>MedPredict</p>
+        <nav>
+          <ul>
+            <li><a href="#container">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#contact">Contact</a></li>
+            <li><a href="forms/login.html">Login</a></li>
+            <li class="profile-dropdown">
+              <a href="#" onclick="return false"><img src="{{ url_for('static', filename='images/profile_logo.png') }}" height="40px" width="40px" alt="profile" style="border-radius:30px;"></a>
+              <div class="dropdown-content">
+                <ul>
+                  <li>Name</li>
+                  <li>Email</li>
+                  <li><a href="">Log Out</a></li>
+                </ul>
+              </div>
+            </li>
+          </ul>
+        </nav>
+      </div>
+      
+      <div id="container">
+        <div class="row">
+          <div class="col">
+            <h1 class="cursor typewriter-animation">Predict.Protect.Live</h1>
+            <p class="p_in_img">Get personalised disease predictions based on your health data. Take control of your health today for a healthier you....</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="bgimg">
+        <div style="width:100%;height:70vh;">
+          <div class="imag"><img width=50% src="{{ url_for('static', filename='images/bg2.png') }}" align="left" style="background-size: cover;"></div>
+          <div class="text-container"><span style="position: relative; top: 25px;left: 20px;">Healthy living results in &nbsp</span>
+            <span>
+              <div class="dropping-texts">
+                <div>Happiness</div>
+                <div>Strength</div>
+                <div>Peace</div>
+                <div>Confidence</div>
+              </div>
+            </span>
+          </div>
+        </div>
+        
+        <div id="about">
+          <h2 id="about_head">About us</h2>
+          <p style="font-size:25px;">"At MedPredict, we leverage advanced machine learning algorithms and medical expertise to provide personalized disease predictions.
+            Our platform empowers individuals to take proactive control of their health by identifying potential risks and recommending preventive measures.
+            Our mission is to deliver accurate, reliable, and accessible health insights, bridging the gap between individuals and healthcare professionals.
+            We are committed to transforming healthcare through AI-driven innovation."</p>
+        </div>
+        
+        <div class="disease">
+          <h2 style="margin-bottom: 30px;padding-top: 100px;color:#03055B;">Check Your Health!!</h2>
+          <div class="images">
+            <figure><a href="{{ url_for('obesity') }}"><img src="{{ url_for('static', filename='images/obesity.jpeg') }}" alt="obesity"></a><figcaption>Obesity Test</figcaption></figure>
+            <figure><a href="{{ url_for('depression') }}"><img src="{{ url_for('static', filename='images/depression.jpg') }}" alt="depression"></a><figcaption> Student Depression Test</figcaption></figure>
+            <figure><a href="{{ url_for('migraine') }}"><img src="{{ url_for('static', filename='images/migrains.jpg') }}" alt="migraine"></a><figcaption>Migraine Test</figcaption></figure>
+            <figure><a href="{{ url_for('dengue') }}"><img src="{{ url_for('static', filename='images/dengue.jpeg') }}" alt="disease4"></a><figcaption>Dengue Test</figcaption></figure>
+          </div>
+        </div>
+      </div>
+      
+      <div id="contact">
+        <h2 style="font-size:40px;margin-bottom: 30px;color:rgb(22, 132, 151);">Contact Details</h2>
+        <p style="font-size:25px;line-height:35px">Email: diseaseprediction@gmail.com<br>Contact no: 1234567890</p>
+      </div>
+      
+      <script>
+        const profileDropdown = document.querySelector('.profile-dropdown');
+        const dropdownContent = document.querySelector('.dropdown-content');
+        let isDropdownShown = false;
+
+        profileDropdown.addEventListener('click', (e) => {
+          e.stopPropagation();
+          if (!isDropdownShown) {
+            dropdownContent.classList.add('show');
+            isDropdownShown = true;
+          }
+        });
+
+        document.addEventListener('click', (e) => {
+          if (!profileDropdown.contains(e.target) && isDropdownShown) {
+            dropdownContent.classList.remove('show');
+            isDropdownShown = false;
+          }
+        });
+
+        const droppingTexts = document.querySelectorAll('.dropping-texts > div');
+        droppingTexts.forEach((text, index) => {
+          text.style.animationDelay = `${index * 1}s`;
+        });
+      </script>
+    </body>
+</html>
