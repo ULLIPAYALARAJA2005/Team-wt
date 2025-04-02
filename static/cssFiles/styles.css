@@ -141,4 +141,9 @@
   .signup-link a:hover, .login-link a:hover {
     text-decoration: underline;
   }
+
+/* Hide file input completely */
+input[type="file"] {
+    display: none;
+}
   

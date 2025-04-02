@@ -1,9 +1,11 @@
-from flask import Flask, render_template, request, redirect, url_for, flash, session
+from flask import Flask, render_template, request, redirect, url_for, session, send_file,flash
 from pymongo import MongoClient
+import gridfs
+import bcrypt
+import io
+from bson import ObjectId
 import smtplib
 import secrets
-from bson.objectid import ObjectId
-
 app = Flask(__name__, template_folder="templates")
 app.secret_key = "secret"
 
@@ -12,8 +14,14 @@ MONGO_URL = "mongodb+srv://raja:rajaRAJA1234@users.7psqc.mongodb.net/?retryWrite
 client = MongoClient(MONGO_URL)
 print("Mongo connected")
 db = client["mydatabase"]  # Database name
-users_collection = db["raja"]  # Collection name
-feedbacks_collection =db["feedback"]
+users_collection = db["userdetails"]  # Collection name
+fs = gridfs.GridFS(db)  # GridFS for storing images
+
+feedbacks_collection1 = db["feedback"]  # Obesity feedback
+depression_collection = db["depression"]  # Depression feedback
+migraine_collection = db["migraine"]  # Migraine feedback
+dengue_collection = db["dengue"]  # Dengue feedback
+
 
 
 # Store tokens temporarily for password reset
@@ -35,6 +43,15 @@ def signup_action():
     name = request.form.get("name")
     email = request.form.get("email")
     password = request.form.get("password")
+    photo = request.files["photo"]
+    # Hash Password
+
+    # Store Image in GridFS
+    if photo:
+        photo_id = fs.put(photo.read(), filename=photo.filename)
+    else:
+        photo_id = None
+
 
     # Check if email already exists
     existing_user = users_collection.find_one({"email": email})
@@ -43,7 +60,9 @@ def signup_action():
         return redirect(url_for("signup"))
 
     # Insert new user if email does not exist
-    users_collection.insert_one({"name": name, "email": email, "password": password})
+        # Store User Data in MongoDB
+    user_data = {"name": name, "email": email, "password":password, "photo_id": photo_id}
+    users_collection.insert_one(user_data)    
     flash("Registration successful!", "success")
     return redirect(url_for("login"))
 
@@ -77,25 +96,88 @@ def login_user():
 
 @app.route("/index")
 def index():
-    return render_template("forms/index.html")
+    if "user" not in session:
+        return redirect(url_for("login"))
+    user = users_collection.find_one({"email": session["user"]})
+    return render_template("forms/index.html",user=user)
 @app.route("/obesity")
 def obesity():
-    return render_template("forms/obesity.html")
+    if "user" not in session:
+        return redirect(url_for("login"))
+    user = users_collection.find_one({"email": session["user"]})
+    session["name"] = "obesity1"
+    return render_template("forms/obesity.html",user=user)
 @app.route("/depression")
 def depression():
-    return render_template("forms/depression.html")
+    if "user" not in session:
+        return redirect(url_for("login"))
+    user = users_collection.find_one({"email": session["user"]})
+    session["name"] = "depression1"
+    return render_template("forms/depression.html",user=user)
 @app.route("/migraine")
 def migraine():
-    return render_template("forms/migraine.html")
+    if "user" not in session:
+        return redirect(url_for("login"))
+    user = users_collection.find_one({"email": session["user"]})
+    session["name"] = "migraine1"
+    return render_template("forms/migraine.html",user=user)
 @app.route("/dengue")
 def dengue():
-    return render_template("forms/dengue.html")
+    if "user" not in session:
+        return redirect(url_for("login"))
+    user = users_collection.find_one({"email": session["user"]})
+    session["name"] = "dengue1"
+    return render_template("forms/dengue.html",user=user)
 @app.route("/About_obesity")
 def About_obesity():
-    return render_template("forms/About_Obesity.html")
+    if "user" not in session:
+        return redirect(url_for("login"))
+    user = users_collection.find_one({"email": session["user"]})
+    return render_template("forms/About_Obesity.html",user=user)
+@app.route("/About_depression")
+def About_depression():
+    if "user" not in session:
+        return redirect(url_for("login"))
+    user = users_collection.find_one({"email": session["user"]})
+    return render_template("forms/About_depression.html",user=user)
+@app.route("/About_migraint")
+def About_migraint():
+    if "user" not in session:
+        return redirect(url_for("login"))
+    user = users_collection.find_one({"email": session["user"]})
+    return render_template("forms/About_migraint.html",user=user)
+@app.route("/About_dengue")
+def About_dengue():
+    if "user" not in session:
+        return redirect(url_for("login"))
+    user = users_collection.find_one({"email": session["user"]})
+    return render_template("forms/About_dengue.html",user=user)
+
+@app.route("/contact")
+def contact():
+    if "user" not in session:
+        return redirect(url_for("login"))
+    user = users_collection.find_one({"email": session["user"]})
+    return render_template("forms/contact_Obesity.html",user=user)
+
 @app.route("/contact_obesity")
 def contact_obesity():
-    return render_template("forms/contact_Obesity.html")
+    if "user" not in session:
+        return redirect(url_for("login"))
+    user = users_collection.find_one({"email": session["user"]})
+    return render_template("forms/contact_Obesity1.html",user=user)
+@app.route("/contact_depression")
+def contact_depression():
+    if "user" not in session:
+        return redirect(url_for("login"))
+    user = users_collection.find_one({"email": session["user"]})
+    return render_template("forms/contact_depression.html",user=user)
+@app.route("/contact_dengue")
+def contact_dengue():
+    if "user" not in session:
+        return redirect(url_for("login"))
+    user = users_collection.find_one({"email": session["user"]})
+    return render_template("forms/contact_dengue.html",user=user)
 
 # Forgot Password Route
 @app.route("/forgot")
@@ -169,8 +251,14 @@ def reset_password_submit():
     session.pop("reset_email", None)
     return redirect(url_for("login"))
 
+
+
+
+
+
+
 @app.route("/userfeedback", methods=["GET", "POST"])
-def userfeedback():
+def userfeedback():   
     return render_template("forms/feed.html")
 @app.route("/feedback", methods=["GET"])
 def feedback():
@@ -179,22 +267,42 @@ def feedback():
 # Route to handle feedback submission
 @app.route("/submit_feedback", methods=["POST"])
 def submit_feedback():
+    
     email = session["user"]  # Get logged-in user's email
-    name = request.form.get("name")
     feedback_text = request.form.get("feedback")
-
-    if not name or not feedback_text:
-        flash("Please fill in all fields!", "danger")
+    print("...bbbbbbbbbbbbbbbbbbbbbbbbbbbb..........aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa........................")
+    if  not feedback_text:
+        flash("Please fill in all field!", "danger")
         return redirect(url_for("feedback"))
+    
+    
+    userpage = session["name"]
+
+    # Default to None (or a safe fallback collection)
+    feedbacks_collection = None  
+
+    if userpage == "obesity1":
+        feedbacks_collection = feedbacks_collection1
+    elif userpage == "depression1":
+        feedbacks_collection = depression_collection
+    elif userpage == "migraine1":
+        feedbacks_collection = migraine_collection
+    elif userpage == "dengue1":
+        feedbacks_collection = dengue_collection
+ # Check if feedbacks_collection is correctly assigned
+    if feedbacks_collection is None:
+        print("Error: feedbacks_collection is not assigned properly!")
+        raise ValueError("Invalid userpage session value: " + str(userpage))
 
     # Check if feedback already exists for this email
     existing_feedback = feedbacks_collection.find_one({"email": email})
     if existing_feedback:
         flash("You have already submitted feedback!", "danger")
         return redirect(url_for("feedback"))
-
+    useremail = users_collection.find_one({"email": session["user"]})
+    username = useremail["name"]
     # Insert feedback if not already given
-    feedbacks_collection.insert_one({"email": email, "name": name, "feedback": feedback_text})
+    feedbacks_collection.insert_one({"email": email, "name":username, "feedback": feedback_text})
     flash("Feedback submitted successfully!", "success")
     return redirect(url_for("feedback"))
 
@@ -202,6 +310,16 @@ def submit_feedback():
 @app.route("/all_feedback")
 def all_feedback():
     user_email = session["user"]
+    userpage = session["name"]
+    if(userpage == "obesity1"):
+        feedbacks_collection = feedbacks_collection1;
+    elif(userpage == "depression1"):
+        feedbacks_collection =depression_collection;
+    elif(userpage == "migraine1"):
+        feedbacks_collection =migraine_collection;    
+    elif(userpage == "dengue1"):
+        feedbacks_collection =dengue_collection; 
+     
     feedbacks = list(feedbacks_collection.find())  # Fetch all feedbacks
     return render_template("forms/all_feedback.html", feedbacks=feedbacks, user_email=user_email)
 
@@ -211,6 +329,16 @@ def delete_feedback(feedback_id):
     if "user" not in session:
         flash("You must be logged in to delete feedback.", "danger")
         return redirect(url_for("login"))
+    userpage = session["name"]
+    if(userpage == "obesity1"):
+        feedbacks_collection = feedbacks_collection1;
+    elif(userpage == "depression1"):
+        feedbacks_collection =depression_collection;
+    elif(userpage == "migraine1"):
+        feedbacks_collection =migraine_collection;    
+    elif(userpage == "dengue1"):
+        feedbacks_collection =dengue_collection; 
+     
     
     feedback = feedbacks_collection.find_one({"_id": ObjectId(feedback_id)})
     if feedback and feedback["email"] == session["user"]:  
@@ -227,6 +355,16 @@ def edit_feedback(feedback_id):
     if "user" not in session:
         flash("You must be logged in to edit feedback.", "danger")
         return redirect(url_for("login"))
+    userpage = session["name"]
+    if(userpage == "obesity1"):
+        feedbacks_collection = feedbacks_collection1;
+    elif(userpage == "depression1"):
+        feedbacks_collection =depression_collection;
+    elif(userpage == "migraine1"):
+        feedbacks_collection =migraine_collection;    
+    elif(userpage == "dengue1"):
+        feedbacks_collection =dengue_collection; 
+     
     
     new_feedback_text = request.form.get("edited_feedback")
     feedback = feedbacks_collection.find_one({"_id": ObjectId(feedback_id)})
@@ -242,18 +380,57 @@ def edit_feedback(feedback_id):
 
     return redirect(url_for("all_feedback"))
 
-@app.route('/profile')
+
+
+
+# Route to Profile Page
+@app.route("/profile")
 def profile():
-    if "user" not in session:  # Check if user is logged in
-        return redirect(url_for('login'))  
+    if "user" not in session:
+        return redirect(url_for("login"))
 
-    user_email = session["user"]  # Get logged-in user's email
-    user = users_collection.find_one({"email": user_email})  # Fetch user details
+    user = users_collection.find_one({"email": session["user"]})
+    return render_template("forms/profile.html", user=user)
 
-    if user:
-        return render_template('forms/profile.html', user=user)
-    else:
-        return "User not found", 404
+# Route to Fetch User Image
+@app.route("/photo/<photo_id>")
+def get_photo(photo_id):
+    try:
+        photo = fs.get(ObjectId(photo_id))  # Convert to ObjectId
+        return send_file(io.BytesIO(photo.read()), mimetype="image/jpeg")
+    except Exception as e:
+        return f"Error: {str(e)}"
+
+# **New Route: Update Name and Profile Picture**
+@app.route("/update_profile", methods=["POST"])
+def update_profile():
+    if "user" not in session:
+        return redirect(url_for("login"))
+
+    user = users_collection.find_one({"email": session["user"]})
+
+    if not user:
+        return "User not found!"
+
+    new_name = request.form["new_name"]
+    new_photo = request.files.get("new_photo")
+
+    update_data = {"name": new_name}  # Update name
+
+    if new_photo:
+        # Delete old photo if exists
+        if user.get("photo_id"):
+            fs.delete(ObjectId(user["photo_id"]))
+
+        # Store new photo in GridFS
+        new_photo_id = fs.put(new_photo.read(), filename=new_photo.filename)
+        update_data["photo_id"] = new_photo_id  # Update photo_id
+
+    # Update user's name and/or photo_id in the database
+    users_collection.update_one({"email": session["user"]}, {"$set": update_data})
+
+    return redirect(url_for("profile"))
+
 @app.route('/logout')
 def logout():
     if "user" in session:
@@ -264,11 +441,24 @@ def logout():
 
         # Remove user session
         session.pop("user", None)  
-        flash("Your account has been deleted and you have been logged out.", "success")
+        flash("Your account has been deleted and you have been logged out.", "danger")
 
     return redirect(url_for('login'))
+@app.route('/back_to_login')
+def back_to_login():
+    return redirect(url_for('login'))
 
-
+@app.route('/back_to_menu')
+def back_to_menu():
+    userpage = session["name"]
+    if(userpage == "obesity1"):
+        return redirect(url_for('obesity'))
+    elif(userpage == "depression1"):
+        return redirect(url_for('depression'))
+    elif(userpage == "migraine1"):
+        return redirect(url_for('migraine'))   
+    elif(userpage == "dengue1"):
+        return redirect(url_for('dengue'))
     
 if __name__ == "__main__":
-    app.run(debug=True, port=5001)
+    app.run(debug=True, port=5002)

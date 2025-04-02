@@ -6,7 +6,7 @@
     <title>Health & Lifestyle Survey</title>
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="{{ url_for('static', filename='cssFiles/obesity.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='cssFiles/About_Obesity.css') }}">
 </head>
 <body>
     <!-- Navigation Bar -->
@@ -18,11 +18,11 @@
 
         <!-- Navigation Links -->
         <ul class="nav-links">
-            <li><a href="{{ url_for('index') }}">Home</a></li>
-            <li><a href="#survey" style="color: #1e345e;">BMI</a></li>
-            <li><a href="{{ url_for('userfeedback') }}">Feedback</a></li>
-            <li><a href="{{ url_for('About_obesity') }}">About</a></li>
-            <li><a href="{{ url_for('contact') }}">Contact</a></li>
+                <li><a href="{{ url_for('index') }}">Home</a></li>
+                <li><a href="{{ url_for('dengue') }}">Dengue</a></li>
+                <li><a href="{{ url_for('userfeedback') }}">Feedback</a></li>
+                <li><a href="#about" style="color: #1e345e;">About</a></li>
+                <li><a href="{{ url_for('contact_dengue') }}" >Contact</a></li>
         </ul>
 
         <!-- Profile Dropdown -->
@@ -48,46 +48,80 @@
             </div>
         </div>
     </nav>
-    <!-- Survey Form -->
-    <div class="form-container">
-        <h1>BMI Calculator</h1>
-        <form action="submit.php" method="post">
-            <label for="age">Age:</label>
-            <input type="number" id="age" name="age" min="1" placeholder="Enter your age" required>
-            <label for="height">Height (cm):</label>
-            <input type="number" id="height" name="height" placeholder="Enter your height in cm" required>
-            <label for="weight">Weight (kg):</label>
-            <input type="number" id="weight" name="weight" placeholder="Enter your weight in kg" required>
-            <label for="veg_frequency">Frequency of Vegetable Consumption (0-5):</label>
-            <input type="number" id="veg_frequency" name="veg_frequency" min="0" max="5" placeholder="0 (Never) - 5 (Daily)" required>
-            <label for="activity_frequency">Physical Activity Frequency (per week):</label>
-            <input type="number" id="activity_frequency" name="activity_frequency" placeholder="Enter number of times per week" required>
-            <label for="family_history">Family History of Health Issues:</label>
-            <select id="family_history" name="family_history" required>
-                <option value="" disabled selected>Select an option</option>
-                <option value="yes">Yes</option>
-                <option value="no">No</option>
-            </select>
-            <label for="sex">Sex:</label>
-            <select id="sex" name="sex" required>
-                <option value="" disabled selected>Select your sex</option>
-                <option value="male">Male</option>
-                <option value="female">Female</option>
-                <option value="other">Other</option>
-            </select>
-            <label for="transportation">Preferred Mode of Transportation:</label>
-            <select id="transportation" name="transportation" required>
-                <option value="" disabled selected>Select an option</option>
-                <option value="public_transportation">Public Transportation</option>
-                <option value="automobile">Automobile</option>
-                <option value="walking">Walking</option>
-                <option value="motorbike">Motorbike</option>
-                <option value="bike">Bike</option>
-            </select>
-            <input type="submit" value="Submit">
-        </form>
+
+  <!-- Header -->
+  <header>
+    <h1>Dengue: A Comprehensive Overview</h1>
+</header>
+
+<div class="container">
+    <div id="top" class="section">
+        <h2>Overview</h2>
+        <p>Dengue is a mosquito-borne viral infection that causes flu-like symptoms and can develop into severe complications such as dengue hemorrhagic fever and dengue shock syndrome.</p>
     </div>
-    
+
+    <div class="section">
+        <h2>Symptoms</h2>
+        <ul>
+            <li>High fever</li>
+            <li>Severe headaches</li>
+            <li>Pain behind the eyes</li>
+            <li>Muscle and joint pain</li>
+            <li>Fatigue and nausea</li>
+            <li>Skin rashes</li>
+            <li>Bleeding (e.g., gums, nose)</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>Causes & Transmission</h2>
+        <p>Dengue is caused by the dengue virus (DENV), which is transmitted by Aedes mosquitoes, primarily <em>Aedes aegypti</em>. The virus spreads through mosquito bites, with infection risk highest in tropical and subtropical regions.</p>
+    </div>
+
+    <div class="section">
+        <h2>Diagnosis</h2>
+        <p>Dengue is diagnosed through blood tests that detect the virus, viral antigens, or antibodies. Common tests include the NS1 antigen test, PCR, and IgM/IgG antibody tests.</p>
+    </div>
+
+    <div class="section">
+        <h2>Prevention</h2>
+        <ul>
+            <li>Eliminating mosquito breeding sites</li>
+            <li>Using insect repellents</li>
+            <li>Wearing protective clothing</li>
+            <li>Installing mosquito nets</li>
+            <li>Community-wide vector control measures</li>
+            <li>Vaccination (where available)</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>Treatment</h2>
+        <p>There is no specific antiviral treatment for dengue. Management focuses on symptom relief, hydration, and monitoring for severe complications requiring hospitalization.</p>
+    </div>
+
+    <div class="section">
+        <h2>Global Impact</h2>
+        <p>Dengue is a major public health concern, affecting millions of people annually. Outbreaks occur frequently in Asia, South America, and Africa, leading to increased disease burden and economic impact.</p>
+    </div>
+
+    <div class="section">
+        <h2>Recent Research</h2>
+        <p>Ongoing research aims to develop better vaccines, antiviral treatments, and mosquito control strategies to reduce dengue transmission and severity.</p>
+    </div>
+
+    <div class="section">
+        <h2>References</h2>
+        <h3>Citations</h3>
+        <p>1. World Health Organization. (2022). Dengue and severe dengue. <br>2. Centers for Disease Control and Prevention. (2023). Dengue fever facts. <br>3. National Institutes of Health. (2021). Advances in dengue research.</p>
+        <h3>Further Reading</h3>
+        <p>- "Dengue and the Aedes Mosquito" by Dr. Maria Silva <br>- "Infectious Disease Control" by Dr. John McKenzie</p>
+        <h3>External Links</h3>
+        <p>- <a href="https://www.who.int/news-room/fact-sheets/detail/dengue-and-severe-dengue" target="_blank">WHO Dengue Information</a> <br>- <a href="https://www.cdc.gov/dengue/index.html" target="_blank">CDC Dengue Resources</a></p>
+    </div>
+</div>
+
+
     <!-- Footer -->
     <footer>
         <p>WE ARE TRYING TO GIVE 100% ACCURACY PREDICTION</p>
